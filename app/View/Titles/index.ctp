@@ -9,9 +9,8 @@
 			<th><?php echo $this->Paginator->sort('category_id');?></th>
 			<th><?php echo $this->Paginator->sort('shelf_id');?></th>
 			<th><?php echo $this->Paginator->sort('year');?></th>
-			<th><?php echo $this->Paginator->sort('notes');?></th>
 			<th><?php echo $this->Paginator->sort('isbn');?></th>
-			<th class="actions"><?php echo __('Actions');?></th>
+			<th></th>
 	</tr>
 	<?php
 	$i = 0;
@@ -30,7 +29,6 @@
 			<?php echo $this->Html->link($title['Shelf']['name'], array('controller' => 'shelves', 'action' => 'view', $title['Shelf']['id'])); ?>
 		</td>
 		<td><?php echo h($title['Title']['year']); ?>&nbsp;</td>
-		<td><?php echo h($title['Title']['notes']); ?>&nbsp;</td>
 		<td><?php echo h($title['Title']['isbn']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $title['Title']['id'])); ?>
@@ -55,19 +53,4 @@
 	?>
 	</div>
 </div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New Title'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Publishers'), array('controller' => 'publishers', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Publisher'), array('controller' => 'publishers', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Categories'), array('controller' => 'categories', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Category'), array('controller' => 'categories', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Shelves'), array('controller' => 'shelves', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Shelf'), array('controller' => 'shelves', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Authors'), array('controller' => 'authors', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Author'), array('controller' => 'authors', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Tags'), array('controller' => 'tags', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Tag'), array('controller' => 'tags', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
+<?php echo $this->element('menu');?>
