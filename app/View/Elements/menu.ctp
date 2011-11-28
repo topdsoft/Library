@@ -12,7 +12,7 @@
 		<li><?php echo $this->Html->link(__('New Publisher'), array('controller' => 'publishers', 'action' => 'add')); ?> </li>
 		<strong>Shelves</strong>
 		<li><?php echo $this->Html->link(__('List Shelves'), array('controller' => 'shelves', 'action' => 'index'));?></li>
-		<li><?php echo $this->Html->link(__('New Shelve'), array('controller' => 'shelves', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Shelf'), array('controller' => 'shelves', 'action' => 'add')); ?> </li>
 		<strong>Tags</strong>
 		<li><?php echo $this->Html->link(__('List Tags'), array('controller' => 'tags', 'action' => 'index'));?></li>
 		<li><?php echo $this->Html->link(__('New Tag'), array('controller' => 'tags', 'action' => 'add')); ?> </li>

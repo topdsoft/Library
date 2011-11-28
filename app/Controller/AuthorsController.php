@@ -15,6 +15,7 @@ class AuthorsController extends AppController {
  */
 	public function index() {
 		$this->Author->recursive = 0;
+		$this->Author->order='name';
 		$this->set('authors', $this->paginate());
 	}
 
@@ -30,6 +31,9 @@ class AuthorsController extends AppController {
 			throw new NotFoundException(__('Invalid author'));
 		}
 		$this->set('author', $this->Author->read(null, $id));
+		$this->set('publishers', $this->Author->Title->Publisher->find('list'));
+		$this->set('categories', $this->Author->Title->Category->find('list'));
+		$this->set('shelves', $this->Author->Title->Shelf->find('list'));
 	}
 
 /**

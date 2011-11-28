@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 25, 2011 at 03:39 PM
+-- Generation Time: Nov 27, 2011 at 08:13 PM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.2-1ubuntu4.10
 
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `authors` (
   `firstName` varchar(40) NOT NULL,
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 -- --------------------------------------------------------
 
@@ -46,6 +46,19 @@ CREATE TABLE IF NOT EXISTS `authors_titles` (
   PRIMARY KEY (`id`),
   KEY `author_id` (`author_id`),
   KEY `title_id` (`title_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bindings`
+--
+
+CREATE TABLE IF NOT EXISTS `bindings` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  `created` datetime NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -68,6 +81,19 @@ CREATE TABLE IF NOT EXISTS `categories` (
 --
 
 CREATE TABLE IF NOT EXISTS `publishers` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  `created` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `series`
+--
+
+CREATE TABLE IF NOT EXISTS `series` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
   `created` datetime NOT NULL,
@@ -128,11 +154,17 @@ CREATE TABLE IF NOT EXISTS `titles` (
   `publisher_id` int(10) unsigned NOT NULL,
   `category_id` int(10) unsigned NOT NULL,
   `shelf_id` int(10) unsigned NOT NULL,
+  `binding_id` int(10) unsigned NOT NULL,
+  `series_id` int(10) unsigned NOT NULL,
   `year` varchar(4) NOT NULL,
   `notes` text NOT NULL,
   `isbn` varchar(15) NOT NULL,
+  `own` tinyint(1) NOT NULL,
+  `read` tinyint(1) NOT NULL,
+  `want` tinyint(1) NOT NULL,
+  `rating` smallint(6) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `publisher_id` (`publisher_id`),
   KEY `category_id` (`category_id`),
   KEY `shelf_id` (`shelf_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;

@@ -6,11 +6,24 @@ App::uses('AppModel', 'Model');
  * @property Title $Title
  */
 class Author extends AppModel {
+
+	var $virtualFields=array(
+		'name' => 'CONCAT(Author.lastName, ", ", Author.firstName )',
+		'titles' => 'select count(*) from authors_titles where authors_titles.author_id=Author.id',
+	);
+	var $order= "name";
+/**
+ * Display field
+ *
+ * @var string
+ */
+	public $displayField = 'name';
 /**
  * Validation rules
  *
  * @var array
  */
+	
 	public $validate = array(
 		'lastName' => array(
 			'notempty' => array(

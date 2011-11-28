@@ -11,6 +11,11 @@
 			<?php echo h($title['Title']['name']); ?>
 			&nbsp;
 		</dd>
+		<dt><?php echo __('Author'); ?></dt>
+		<dd>
+			<?php echo h($title['Title']['author']); ?>
+			&nbsp;
+		</dd>
 		<dt><?php echo __('Created'); ?></dt>
 		<dd>
 			<?php echo h($title['Title']['created']); ?>
@@ -48,35 +53,26 @@
 		</dd>
 	</dl>
 </div>
+<?php echo $this->element('menu');?>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('Edit Title'), array('action' => 'edit', $title['Title']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Title'), array('action' => 'delete', $title['Title']['id']), null, __('Are you sure you want to delete # %s?', $title['Title']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Titles'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Title'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Publishers'), array('controller' => 'publishers', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Publisher'), array('controller' => 'publishers', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Categories'), array('controller' => 'categories', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Category'), array('controller' => 'categories', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Shelves'), array('controller' => 'shelves', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Shelf'), array('controller' => 'shelves', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Authors'), array('controller' => 'authors', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Author'), array('controller' => 'authors', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Tags'), array('controller' => 'tags', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Tag'), array('controller' => 'tags', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Form->postLink(__('Delete Title'), array('action' => 'delete', $title['Title']['id']), null, 
+			__('Are you sure you want to delete title: %s?', $title['Title']['name'])); ?> </li>
+		<li><?php echo $this->Html->link(__('New Tag'), array('controller' => 'tags', 'action' => 'add', $title['Title']['id'])); ?> </li>
 	</ul>
 </div>
 <div class="related">
-	<h3><?php echo __('Related Authors');?></h3>
 	<?php if (!empty($title['Author'])):?>
+	<h3><?php echo __('Related Authors');?></h3>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
 		<th><?php echo __('Id'); ?></th>
 		<th><?php echo __('LastName'); ?></th>
 		<th><?php echo __('FirstName'); ?></th>
 		<th><?php echo __('Created'); ?></th>
-		<th class="actions"><?php echo __('Actions');?></th>
+		<th class="actions"></th>
 	</tr>
 	<?php
 		$i = 0;
@@ -89,22 +85,15 @@
 			<td class="actions">
 				<?php echo $this->Html->link(__('View'), array('controller' => 'authors', 'action' => 'view', $author['id'])); ?>
 				<?php echo $this->Html->link(__('Edit'), array('controller' => 'authors', 'action' => 'edit', $author['id'])); ?>
-				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'authors', 'action' => 'delete', $author['id']), null, __('Are you sure you want to delete # %s?', $author['id'])); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>
 	</table>
 <?php endif; ?>
 
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Author'), array('controller' => 'authors', 'action' => 'add'));?> </li>
-		</ul>
-	</div>
-</div>
 <div class="related">
-	<h3><?php echo __('Related Tags');?></h3>
 	<?php if (!empty($title['Tag'])):?>
+	<h3><?php echo __('Related Tags');?></h3>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
 		<th><?php echo __('Id'); ?></th>
@@ -128,10 +117,3 @@
 	<?php endforeach; ?>
 	</table>
 <?php endif; ?>
-
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Tag'), array('controller' => 'tags', 'action' => 'add'));?> </li>
-		</ul>
-	</div>
-</div>

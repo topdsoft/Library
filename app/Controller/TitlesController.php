@@ -15,6 +15,7 @@ class TitlesController extends AppController {
  */
 	public function index() {
 		$this->Title->recursive = 0;
+		$this->paginate=array('order'=>array('Title.author'=>'asc','Title.name'=>'asc'));
 		$this->set('titles', $this->paginate());
 	}
 
@@ -37,22 +38,39 @@ class TitlesController extends AppController {
  *
  * @return void
  */
-	public function add() {
+	public function add($id=null) {
 		if ($this->request->is('post')) {
 			$this->Title->create();
+//debug($this->request->data);exit;
 			if ($this->Title->save($this->request->data)) {
 				$this->Session->setFlash(__('The title has been saved'));
+				if(isset($this->request->data['form']['referer'])) $this->redirect($this->request->data['form']['referer']);
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The title could not be saved. Please, try again.'));
 			}
-		}
+		} else {
+			//get referrer
+			$this->request->data['form']['referer']=$this->referer(array('action' => 'index'),true);
+			//set defaults to none
+			$this->request->data['Title']['category_id']=0;
+			$this->request->data['Title']['publisher_id']=0;
+			$this->request->data['Title']['shelf_id']=0;
+			$this->request->data['Title']['binding_id']=0;
+			$this->request->data['Title']['series_id']=0;
+		}//endif for post
 		$publishers = $this->Title->Publisher->find('list');
 		$categories = $this->Title->Category->find('list');
 		$shelves = $this->Title->Shelf->find('list');
+		$publishers[0]=$shelves[0]=$categories[0]='(none)';
 		$authors = $this->Title->Author->find('list');
 		$tags = $this->Title->Tag->find('list');
 		$this->set(compact('publishers', 'categories', 'shelves', 'authors', 'tags'));
+		//check for input
+		if($id) {
+			//value passed in validate and set author
+			if($this->Title->Author->read(null,$id)) $this->request->data['Author']['id']=$id;
+		}//endif
 	}
 
 /**
@@ -79,6 +97,7 @@ class TitlesController extends AppController {
 		$publishers = $this->Title->Publisher->find('list');
 		$categories = $this->Title->Category->find('list');
 		$shelves = $this->Title->Shelf->find('list');
+		$publishers[0]=$shelves[0]=$categories[0]='(none)';
 		$authors = $this->Title->Author->find('list');
 		$tags = $this->Title->Tag->find('list');
 		$this->set(compact('publishers', 'categories', 'shelves', 'authors', 'tags'));

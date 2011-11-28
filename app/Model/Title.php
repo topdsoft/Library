@@ -10,6 +10,11 @@ App::uses('AppModel', 'Model');
  * @property Tag $Tag
  */
 class Title extends AppModel {
+	var $virtualFields=array(
+		'author' => 'select CONCAT(Author.lastName, ", ", Author.firstName) from authors as Author,authors_titles 
+			where Author.id=authors_titles.author_id and authors_titles.title_id=Title.id limit 1',
+	);
+
 /**
  * Display field
  *
