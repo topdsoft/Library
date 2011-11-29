@@ -149,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `tags_titles` (
 
 CREATE TABLE IF NOT EXISTS `titles` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(40) NOT NULL,
+  `name` varchar(75) NOT NULL,
   `created` datetime NOT NULL,
   `publisher_id` int(10) unsigned NOT NULL,
   `category_id` int(10) unsigned NOT NULL,

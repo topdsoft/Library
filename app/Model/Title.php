@@ -61,6 +61,20 @@ class Title extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
+		'Binding' => array(
+			'className' => 'Binding',
+			'foreignKey' => 'binding_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'Series' => array(
+			'className' => 'Series',
+			'foreignKey' => 'series_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
 		'Shelf' => array(
 			'className' => 'Shelf',
 			'foreignKey' => 'shelf_id',

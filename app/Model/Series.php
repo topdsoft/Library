@@ -1,16 +1,16 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * Category Model
+ * Series Model
  *
  * @property Title $Title
  */
-class Category extends AppModel {
+class Series extends AppModel {
 	var $virtualFields=array(
-		'titles' => 'select count(*) from titles as Title where Category.id=Title.category_id',
+		'titles'=>'select count(*) from titles as Title where Series.id=Title.series_id',
 	);
 
-	/**
+/**
  * Display field
  *
  * @var string
@@ -44,7 +44,7 @@ class Category extends AppModel {
 	public $hasMany = array(
 		'Title' => array(
 			'className' => 'Title',
-			'foreignKey' => 'category_id',
+			'foreignKey' => 'series_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',

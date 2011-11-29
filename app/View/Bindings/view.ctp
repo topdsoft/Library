@@ -1,38 +1,31 @@
-<div class="shelves view">
-<h2><?php  echo __('Shelf');?></h2>
+<div class="bindings view">
+<h2><?php  echo __('Binding');?></h2>
 	<dl>
 		<dt><?php echo __('Id'); ?></dt>
 		<dd>
-			<?php echo h($shelf['Shelf']['id']); ?>
+			<?php echo h($binding['Binding']['id']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Name'); ?></dt>
 		<dd>
-			<?php echo h($shelf['Shelf']['name']); ?>
+			<?php echo h($binding['Binding']['name']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Number of Titles'); ?></dt>
 		<dd>
-			<?php echo h($shelf['Shelf']['titles']); ?>
+			<?php echo h($binding['Binding']['titles']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Created'); ?></dt>
 		<dd>
-			<?php echo h($shelf['Shelf']['created']); ?>
+			<?php echo h($binding['Binding']['created']); ?>
 			&nbsp;
 		</dd>
 	</dl>
 </div>
 <?php echo $this->element('menu');?>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Shelf'), array('action' => 'edit', $shelf['Shelf']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('New Title'), array('controller' => 'titles', 'action' => 'add', $shelf['Shelf']['id'])); ?> </li>
-	</ul>
-</div>
 <div class="related">
-	<?php if (!empty($shelf['Title'])):?>
+	<?php if (!empty($binding['Title'])):?>
 	<h3><?php echo __('Related Titles');?></h3>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
@@ -43,7 +36,7 @@
 	</tr>
 	<?php
 		$i = 0;
-		foreach ($shelf['Title'] as $title): ?>
+		foreach ($binding['Title'] as $title): ?>
 		<tr>
 			<td><?php echo $title['id'];?></td>
 			<td><?php echo $title['name'];?></td>

@@ -1,5 +1,5 @@
-<div class="shelves index">
-	<h2><?php echo __('Shelves');?></h2>
+<div class="bindings index">
+	<h2><?php echo __('Bindings');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
@@ -10,17 +10,17 @@
 	</tr>
 	<?php
 	$i = 0;
-	foreach ($shelves as $shelf): ?>
+	foreach ($bindings as $binding): ?>
 	<tr>
-		<td><?php echo h($shelf['Shelf']['id']); ?>&nbsp;</td>
-		<td><?php echo h($shelf['Shelf']['name']); ?>&nbsp;</td>
-		<td><?php echo h($shelf['Shelf']['titles']); ?>&nbsp;</td>
-		<td><?php echo h($shelf['Shelf']['created']); ?>&nbsp;</td>
+		<td><?php echo h($binding['Binding']['id']); ?>&nbsp;</td>
+		<td><?php echo h($binding['Binding']['name']); ?>&nbsp;</td>
+		<td><?php echo h($binding['Binding']['titles']); ?>&nbsp;</td>
+		<td><?php echo h($binding['Binding']['created']); ?>&nbsp;</td>
 		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $shelf['Shelf']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $shelf['Shelf']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $shelf['Shelf']['id']), null, 
-				__('Are you sure you want to delete shelf: %s? (No titles will be deleted)', $shelf['Shelf']['name'])); ?>
+			<?php echo $this->Html->link(__('View'), array('action' => 'view', $binding['Binding']['id'])); ?>
+			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $binding['Binding']['id'])); ?>
+			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $binding['Binding']['id']), null, 
+				__('Are you sure you want to delete binding: %s? (No titles will be deleted)', $binding['Binding']['name'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

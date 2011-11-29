@@ -4,8 +4,9 @@
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
 			<th><?php echo $this->Paginator->sort('name');?></th>
+			<th><?php echo $this->Paginator->sort('titles');?></th>
 			<th><?php echo $this->Paginator->sort('created');?></th>
-			<th class="actions"><?php echo __('Actions');?></th>
+			<th class="actions"></th>
 	</tr>
 	<?php
 	$i = 0;
@@ -13,11 +14,13 @@
 	<tr>
 		<td><?php echo h($tag['Tag']['id']); ?>&nbsp;</td>
 		<td><?php echo h($tag['Tag']['name']); ?>&nbsp;</td>
+		<td><?php echo h($tag['Tag']['titles']); ?>&nbsp;</td>
 		<td><?php echo h($tag['Tag']['created']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $tag['Tag']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $tag['Tag']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $tag['Tag']['id']), null, __('Are you sure you want to delete # %s?', $tag['Tag']['id'])); ?>
+			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $tag['Tag']['id']), null, 
+				__('Are you sure you want to delete tag: %s? (No titles wil be deleted)', $tag['Tag']['name'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -37,11 +40,4 @@
 	?>
 	</div>
 </div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New Tag'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Titles'), array('controller' => 'titles', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Title'), array('controller' => 'titles', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
+<?php echo $this->element('menu');?>

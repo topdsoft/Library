@@ -6,7 +6,11 @@ App::uses('AppModel', 'Model');
  * @property Title $Title
  */
 class Publisher extends AppModel {
-/**
+	var $virtualFields=array(
+		'titles' => 'select count(*) from titles as Title where Publisher.id=Title.publisher_id',
+	);
+
+	/**
  * Display field
  *
  * @var string

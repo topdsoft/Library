@@ -1,7 +1,7 @@
-<div class="publishers form">
-<?php echo $this->Form->create('Publisher');?>
+<div class="series form">
+<?php echo $this->Form->create('Series');?>
 	<fieldset>
-		<legend><?php echo __('Add Publisher'); ?></legend>
+		<legend><?php echo __('Add Series'); ?></legend>
 	<?php
 		echo $this->Form->input('name');
 	?>

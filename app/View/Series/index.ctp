@@ -1,5 +1,5 @@
-<div class="shelves index">
-	<h2><?php echo __('Shelves');?></h2>
+<div class="series index">
+	<h2><?php echo __('Series');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
@@ -10,17 +10,17 @@
 	</tr>
 	<?php
 	$i = 0;
-	foreach ($shelves as $shelf): ?>
+	foreach ($series as $series): ?>
 	<tr>
-		<td><?php echo h($shelf['Shelf']['id']); ?>&nbsp;</td>
-		<td><?php echo h($shelf['Shelf']['name']); ?>&nbsp;</td>
-		<td><?php echo h($shelf['Shelf']['titles']); ?>&nbsp;</td>
-		<td><?php echo h($shelf['Shelf']['created']); ?>&nbsp;</td>
+		<td><?php echo h($series['Series']['id']); ?>&nbsp;</td>
+		<td><?php echo h($series['Series']['name']); ?>&nbsp;</td>
+		<td><?php echo h($series['Series']['titles']); ?>&nbsp;</td>
+		<td><?php echo h($series['Series']['created']); ?>&nbsp;</td>
 		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $shelf['Shelf']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $shelf['Shelf']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $shelf['Shelf']['id']), null, 
-				__('Are you sure you want to delete shelf: %s? (No titles will be deleted)', $shelf['Shelf']['name'])); ?>
+			<?php echo $this->Html->link(__('View'), array('action' => 'view', $series['Series']['id'])); ?>
+			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $series['Series']['id'])); ?>
+			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $series['Series']['id']), null, 
+				__('Are you sure you want to delete Series: %s? (No titles will be deleted)', $series['Series']['name'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

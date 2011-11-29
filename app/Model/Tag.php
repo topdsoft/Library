@@ -6,7 +6,11 @@ App::uses('AppModel', 'Model');
  * @property Title $Title
  */
 class Tag extends AppModel {
-/**
+	var $virtualFields=array(
+		'titles' => 'select count(*) from tags_titles where Tag.id=tags_titles.tag_id',
+	);
+
+	/**
  * Display field
  *
  * @var string

@@ -43,13 +43,11 @@
 	<tr>
 		<th><?php echo __('Id'); ?></th>
 		<th><?php echo __('Name'); ?></th>
-		<th><?php echo __('Created'); ?></th>
 		<th><?php echo __('Publisher'); ?></th>
 		<th><?php echo __('Category'); ?></th>
+		<th><?php echo __('Series'); ?></th>
 		<th><?php echo __('Shelf'); ?></th>
 		<th><?php echo __('Year'); ?></th>
-		<th><?php echo __('Notes'); ?></th>
-		<th><?php echo __('Isbn'); ?></th>
 		<th class="actions"></th>
 	</tr>
 	<?php
@@ -57,21 +55,19 @@
 		$publishers[0]=null;
 		$categories[0]=null;
 		$shelves[0]=null;
+		$series[0]=null;
 		foreach ($author['Title'] as $title): ?>
 		<tr>
 			<td><?php echo $title['id'];?></td>
 			<td><?php echo $title['name'];?></td>
-			<td><?php echo $title['created'];?></td>
 			<td><?php echo $publishers[$title['publisher_id']];?></td>
 			<td><?php echo $categories[$title['category_id']];?></td>
+			<td><?php echo $series[$title['series_id']];?></td>
 			<td><?php echo $shelves[$title['shelf_id']];?></td>
 			<td><?php echo $title['year'];?></td>
-			<td><?php echo $title['notes'];?></td>
-			<td><?php echo $title['isbn'];?></td>
 			<td class="actions">
 				<?php echo $this->Html->link(__('View'), array('controller' => 'titles', 'action' => 'view', $title['id'])); ?>
 				<?php echo $this->Html->link(__('Edit'), array('controller' => 'titles', 'action' => 'edit', $title['id'])); ?>
-				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'titles', 'action' => 'delete', $title['id']), null, __('Are you sure you want to delete # %s?', $title['id'])); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>

@@ -1,24 +1,24 @@
-<div class="shelves view">
-<h2><?php  echo __('Shelf');?></h2>
+<div class="series view">
+<h2><?php  echo __('Series');?></h2>
 	<dl>
 		<dt><?php echo __('Id'); ?></dt>
 		<dd>
-			<?php echo h($shelf['Shelf']['id']); ?>
+			<?php echo h($series['Series']['id']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Name'); ?></dt>
 		<dd>
-			<?php echo h($shelf['Shelf']['name']); ?>
+			<?php echo h($series['Series']['name']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Number of Titles'); ?></dt>
 		<dd>
-			<?php echo h($shelf['Shelf']['titles']); ?>
+			<?php echo h($series['Series']['titles']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Created'); ?></dt>
 		<dd>
-			<?php echo h($shelf['Shelf']['created']); ?>
+			<?php echo h($series['Series']['created']); ?>
 			&nbsp;
 		</dd>
 	</dl>
@@ -27,12 +27,12 @@
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('Edit Shelf'), array('action' => 'edit', $shelf['Shelf']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('New Title'), array('controller' => 'titles', 'action' => 'add', $shelf['Shelf']['id'])); ?> </li>
+		<li><?php echo $this->Html->link(__('Edit Series'), array('action' => 'edit', $series['Series']['id'])); ?> </li>
+		<li><?php echo $this->Html->link(__('New Title with this Series'), array('controller' => 'titles', 'action' => 'add', $series['Series']['id'])); ?> </li>
 	</ul>
 </div>
 <div class="related">
-	<?php if (!empty($shelf['Title'])):?>
+	<?php if (!empty($series['Title'])):?>
 	<h3><?php echo __('Related Titles');?></h3>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
@@ -43,7 +43,7 @@
 	</tr>
 	<?php
 		$i = 0;
-		foreach ($shelf['Title'] as $title): ?>
+		foreach ($series['Title'] as $title): ?>
 		<tr>
 			<td><?php echo $title['id'];?></td>
 			<td><?php echo $title['name'];?></td>

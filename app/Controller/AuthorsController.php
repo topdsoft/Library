@@ -34,6 +34,7 @@ class AuthorsController extends AppController {
 		$this->set('publishers', $this->Author->Title->Publisher->find('list'));
 		$this->set('categories', $this->Author->Title->Category->find('list'));
 		$this->set('shelves', $this->Author->Title->Shelf->find('list'));
+		$this->set('series', $this->Author->Title->Series->find('list'));
 	}
 
 /**

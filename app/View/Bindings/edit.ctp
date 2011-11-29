@@ -1,7 +1,7 @@
-<div class="publishers form">
-<?php echo $this->Form->create('Publisher');?>
+<div class="bindings form">
+<?php echo $this->Form->create('Binding');?>
 	<fieldset>
-		<legend><?php echo __('Edit Publisher'); ?></legend>
+		<legend><?php echo __('Edit Binding'); ?></legend>
 	<?php
 		echo $this->Form->input('id');
 		echo $this->Form->input('name');
