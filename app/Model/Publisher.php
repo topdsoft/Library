@@ -56,5 +56,23 @@ class Publisher extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+/**
+ * Used to check for an existing publisher and of there is one return id if not add new and return id
+ * Pre: $name is the name to check for
+ * Mod: if not found add publisher
+ * Post: return publisher_id
+ */
+	public function checkAdd($name) {
+		$publisher=$this->find('first',array('conditions'=>array('Publisher.name'=>$name)));
+		$id=null;
+		if($publisher) {
+			//publisher found
+			$id=$publisher['Publisher']['id'];
+		} else {
+			//add publisher
+			if($this->save(array('id'=>null,'name'=>$name))) $id=$this->getInsertId();
+		}//endif
+		return $id;
+	}//end public function checkAdd
 
 }

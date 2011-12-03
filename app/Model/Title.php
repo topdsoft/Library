@@ -14,6 +14,7 @@ class Title extends AppModel {
 		'author' => 'select CONCAT(Author.lastName, ", ", Author.firstName) from authors as Author,authors_titles 
 			where Author.id=authors_titles.author_id and authors_titles.title_id=Title.id limit 1',
 	);
+	var $order= "Title.name";
 
 /**
  * Display field

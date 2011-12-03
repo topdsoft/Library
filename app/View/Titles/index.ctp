@@ -6,6 +6,7 @@
 			<th><?php echo $this->Paginator->sort('author');?></th>
 			<th><?php echo $this->Paginator->sort('name');?></th>
 			<th><?php echo $this->Paginator->sort('category_id');?></th>
+			<th><?php echo $this->Paginator->sort('series_id');?></th>
 			<th><?php echo $this->Paginator->sort('shelf_id');?></th>
 			<th></th>
 	</tr>
@@ -18,6 +19,9 @@
 		<td><?php echo h($title['Title']['name']); ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Html->link($title['Category']['name'], array('controller' => 'categories', 'action' => 'view', $title['Category']['id'])); ?>
+		</td>
+		<td>
+			<?php echo $this->Html->link($title['Series']['name'], array('controller' => 'series', 'action' => 'view', $title['Series']['id'])); ?>
 		</td>
 		<td>
 			<?php echo $this->Html->link($title['Shelf']['name'], array('controller' => 'shelves', 'action' => 'view', $title['Shelf']['id'])); ?>

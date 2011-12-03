@@ -6,7 +6,7 @@
 		echo $this->Form->input('id');
 		echo $this->Form->input('lastName');
 		echo $this->Form->input('firstName');
-		echo $this->Form->input('Title',array('label'=>'Titles by this Author:'));
+//		echo $this->Form->input('Title',array('label'=>'Titles by this Author:'));
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit'));?>

@@ -15,7 +15,7 @@ class TitlesController extends AppController {
  */
 	public function index() {
 		$this->Title->recursive = 0;
-		$this->paginate=array('order'=>array('Title.author'=>'asc','Title.name'=>'asc'));
+		$this->paginate=array('order'=>array('Title.author'=>'asc','Title.name'=>'asc'),'limit'=>3000);
 		$this->set('titles', $this->paginate());
 	}
 
@@ -41,6 +41,24 @@ class TitlesController extends AppController {
 	public function add($id=null) {
 		if ($this->request->is('post')) {
 			$this->Title->create();
+			//add or find entered author
+			if(!empty($this->request->data['in']['firstName']) && !empty($this->request->data['in']['lastName'])) {
+				//user added author names
+				$addId=$this->Title->Author->checkAdd($this->request->data['in']['lastName'],$this->request->data['in']['firstName']);
+				if($addId)$this->request->data['Author']['Author'][]=$addId;
+			}//endif
+			//check if user wants to add a new publisher
+			if(!empty($this->request->data['in']['pub'])) {
+				//user added a new publisher
+				$addId=$this->Title->Publisher->checkAdd($this->request->data['in']['pub']);
+				if($addId)$this->request->data['Title']['publisher_id']=$addId;
+			}//endif
+			//check if user wants to add a new category
+			if(!empty($this->request->data['in']['cat'])) {
+				//user added a new category
+				$addId=$this->Title->Category->checkAdd($this->request->data['in']['cat']);
+				if($addId)$this->request->data['Title']['category_id']=$addId;
+			}//endif
 //debug($this->request->data);exit;
 			if ($this->Title->save($this->request->data)) {
 				$this->Session->setFlash(__('The title has been saved'));
@@ -108,6 +126,35 @@ class TitlesController extends AppController {
 			throw new NotFoundException(__('Invalid title'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
+			//reload authors data
+			$read=$this->Title->read(null,$this->request->data['Title']['id']);
+			//add existing authors data back into request data (if user is not removing them)
+			$this->request->data['Author']['Author']=array();
+			foreach($read['Author'] as $a) if(!$this->request->data['in']['remove'][$a['id']])$this->request->data['Author']['Author'][]=$a['id'];
+//debug($read);
+			//check if user wants to add authors
+			if($this->request->data['Title']['author_id']!=0) {
+				//add from listbox
+				$this->request->data['Author']['Author'][]=$this->request->data['Title']['author_id'];
+			}//endif
+			if(!empty($this->request->data['in']['firstName']) && !empty($this->request->data['in']['lastName'])) {
+				//user added author names
+				$addId=$this->Title->Author->checkAdd($this->request->data['in']['lastName'],$this->request->data['in']['firstName']);
+				if($addId)$this->request->data['Author']['Author'][]=$addId;
+			}//endif
+			//check if user wants to add a new publisher
+			if(!empty($this->request->data['in']['pub'])) {
+				//user added a new publisher
+				$addId=$this->Title->Publisher->checkAdd($this->request->data['in']['pub']);
+				if($addId)$this->request->data['Title']['publisher_id']=$addId;
+			}//endif
+			//check if user wants to add a new category
+			if(!empty($this->request->data['in']['cat'])) {
+				//user added a new category
+				$addId=$this->Title->Category->checkAdd($this->request->data['in']['cat']);
+				if($addId)$this->request->data['Title']['category_id']=$addId;
+			}//endif
+//debug($this->request->data);exit;
 			if ($this->Title->save($this->request->data)) {
 				$this->Session->setFlash(__('The title has been saved'));
 				if(isset($this->request->data['form']['referer'])) $this->redirect($this->request->data['form']['referer']);
@@ -125,8 +172,9 @@ class TitlesController extends AppController {
 		$shelves = $this->Title->Shelf->find('list');
 		$series = $this->Title->Series->find('list');
 		$bindings = $this->Title->Binding->find('list');
-		$publishers[0]=$shelves[0]=$categories[0]=$bindings[0]=$series[0]='(none)';
 		$authors = $this->Title->Author->find('list');
+		$publishers[0]=$shelves[0]=$categories[0]=$bindings[0]=$series[0]=$authors[0]='(none)';
+		$this->request->data['Title']['author_id']=0;
 		$tags = $this->Title->Tag->find('list');
 		$this->set(compact('publishers', 'categories', 'shelves', 'authors', 'tags', 'bindings', 'series'));
 	}

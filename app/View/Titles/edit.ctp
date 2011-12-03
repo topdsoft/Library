@@ -5,9 +5,24 @@
 	<?php
 		echo $this->Form->input('id');
 		echo $this->Form->input('name');
-		echo $this->Form->input('Author');
+//		echo $this->Form->input('Author');
+		echo '<fieldset><legend>'.__('Author Data').'</legend>';
+//debug($this->Form->data);
+		foreach($this->Form->data['Author'] as $author) {
+			//loop for each current author
+			echo '<strong>'.$author['name'].'<strong>';
+			echo $this->Form->input('in.remove.'.$author['id'],array('type'=>'checkbox','label'=>'Remove'));
+		}//end for each
+		echo '</fieldset><fieldset><legend>'.__('Add a New Author').'</legend>';
+		echo $this->Form->input('in.firstName');
+		echo $this->Form->input('in.lastName');
+		echo __('Or select from a list:');
+		echo $this->Form->input('author_id');
+		echo '</fieldset>';
 		echo $this->Form->input('publisher_id');
+		echo $this->Form->input('in.pub',array('label'=>'New Publisher'));
 		echo $this->Form->input('category_id');
+		echo $this->Form->input('in.cat',array('label'=>'New Category'));
 		echo $this->Form->input('binding_id');
 		echo $this->Form->input('series_id');
 		echo $this->Form->input('shelf_id');

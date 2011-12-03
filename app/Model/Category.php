@@ -56,5 +56,23 @@ class Category extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+/**
+ * Used to check for an existing category and of there is one return id if not add new and return id
+ * Pre: $name is the name to check for
+ * Mod: if not found add category
+ * Post: return category_id
+ */
+	public function checkAdd($name) {
+		$category=$this->find('first',array('conditions'=>array('Category.name'=>$name)));
+		$id=null;
+		if($category) {
+			//publisher found
+			$id=$category['Category']['id'];
+		} else {
+			//add publisher
+			if($this->save(array('id'=>null,'name'=>$name))) $id=$this->getInsertId();
+		}//endif
+		return $id;
+	}//end public function checkAdd
 
 }
