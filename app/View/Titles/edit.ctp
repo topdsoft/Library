@@ -13,7 +13,7 @@
 			echo '<strong>'.$author['name'].'<strong>';
 			echo $this->Form->input('in.remove.'.$author['id'],array('type'=>'checkbox','label'=>'Remove'));
 		}//end for each
-		echo '</fieldset><fieldset><legend>'.__('Add a New Author').'</legend>';
+		echo '<br><h4>'.__('Add a New Author:').'</h4>';
 		echo $this->Form->input('in.firstName');
 		echo $this->Form->input('in.lastName');
 		echo __('Or select from a list:');
@@ -24,8 +24,11 @@
 		echo $this->Form->input('category_id');
 		echo $this->Form->input('in.cat',array('label'=>'New Category'));
 		echo $this->Form->input('binding_id');
+		echo $this->Form->input('in.bind',array('label'=>'New Binding'));
 		echo $this->Form->input('series_id');
+		echo $this->Form->input('in.ser',array('label'=>'New Series'));
 		echo $this->Form->input('shelf_id');
+		echo $this->Form->input('in.shl',array('label'=>'New Shelf'));
 		echo $this->Form->input('year');
 		echo $this->Form->input('notes');
 		echo $this->Form->input('isbn');

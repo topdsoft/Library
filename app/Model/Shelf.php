@@ -56,5 +56,23 @@ class Shelf extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+/**
+ * Used to check for an existing shelf and of there is one return id if not add new and return id
+ * Pre: $name is the name to check for
+ * Mod: if not found add shelf
+ * Post: return shelf_id
+ */
+	public function checkAdd($name) {
+		$shelf=$this->find('first',array('conditions'=>array('Shelf.name'=>$name)));
+		$id=null;
+		if($category) {
+			//shelf found
+			$id=$shelf['Shelf']['id'];
+		} else {
+			//add shelf
+			if($this->save(array('id'=>null,'name'=>$name))) $id=$this->getInsertId();
+		}//endif
+		return $id;
+	}//end public function checkAdd
 
 }

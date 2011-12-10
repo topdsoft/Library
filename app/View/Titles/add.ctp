@@ -5,7 +5,7 @@
 	<?php
 		echo $this->Form->input('id');
 		echo $this->Form->input('name');
-		echo $this->Form->input('Author');
+		echo $this->Form->input('Author',array('label'=>'Select Authors:'));
 		echo '<fieldset><legend>'.__('Add a New Author').'</legend>';
 		echo $this->Form->input('in.firstName');
 		echo $this->Form->input('in.lastName');
@@ -15,8 +15,11 @@
 		echo $this->Form->input('category_id');
 		echo $this->Form->input('in.cat',array('label'=>'New Category'));
 		echo $this->Form->input('binding_id');
+		echo $this->Form->input('in.bind',array('label'=>'New Binding'));
 		echo $this->Form->input('series_id');
+		echo $this->Form->input('in.ser',array('label'=>'New Series'));
 		echo $this->Form->input('shelf_id');
+		echo $this->Form->input('in.shl',array('label'=>'New Shelf'));
 		echo $this->Form->input('year');
 		echo $this->Form->input('notes');
 		echo $this->Form->input('isbn');

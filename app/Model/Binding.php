@@ -55,5 +55,23 @@ class Binding extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+/**
+ * Used to check for an existing binding and of there is one return id if not add new and return id
+ * Pre: $name is the name to check for
+ * Mod: if not found add binding
+ * Post: return binding_id
+ */
+	public function checkAdd($name) {
+		$binding=$this->find('first',array('conditions'=>array('Binding.name'=>$name)));
+		$id=null;
+		if($binding) {
+			//$binding found
+			$id=$binding['Binding']['id'];
+		} else {
+			//add $binding
+			if($this->save(array('id'=>null,'name'=>$name))) $id=$this->getInsertId();
+		}//endif
+		return $id;
+	}//end public function checkAdd
 
 }

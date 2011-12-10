@@ -56,5 +56,23 @@ class Series extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+/**
+ * Used to check for an existing series and of there is one return id if not add new and return id
+ * Pre: $name is the name to check for
+ * Mod: if not found add series
+ * Post: return series_id
+ */
+	public function checkAdd($name) {
+		$series=$this->find('first',array('conditions'=>array('Series.name'=>$name)));
+		$id=null;
+		if($series) {
+			//series found
+			$id=$series['Series']['id'];
+		} else {
+			//add series
+			if($this->save(array('id'=>null,'name'=>$name))) $id=$this->getInsertId();
+		}//endif
+		return $id;
+	}//end public function checkAdd
 
 }

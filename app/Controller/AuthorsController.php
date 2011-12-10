@@ -15,6 +15,7 @@ class AuthorsController extends AppController {
  */
 	public function index() {
 		$this->Author->recursive = 0;
+		$this->paginate=array('limit'=>$this->Auth->user('titleLimit'),'maxLimit'=>10000);
 		$this->Author->order='name';
 		$this->set('authors', $this->paginate());
 	}

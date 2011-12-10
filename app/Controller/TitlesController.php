@@ -14,8 +14,9 @@ class TitlesController extends AppController {
  * @return void
  */
 	public function index() {
+//debug($this->Auth->user());exit();
 		$this->Title->recursive = 0;
-		$this->paginate=array('order'=>array('Title.author'=>'asc','Title.name'=>'asc'),'limit'=>3000);
+		$this->paginate=array('order'=>array('Title.author'=>'asc','Title.name'=>'asc'),'limit'=>$this->Auth->user('titleLimit'),'maxLimit'=>10000);
 		$this->set('titles', $this->paginate());
 	}
 
@@ -58,6 +59,24 @@ class TitlesController extends AppController {
 				//user added a new category
 				$addId=$this->Title->Category->checkAdd($this->request->data['in']['cat']);
 				if($addId)$this->request->data['Title']['category_id']=$addId;
+			}//endif
+			//check if user wants to add a new binding
+			if(!empty($this->request->data['in']['bind'])) {
+				//user added a new binding
+				$addId=$this->Title->Binding->checkAdd($this->request->data['in']['bind']);
+				if($addId)$this->request->data['Title']['binding_id']=$addId;
+			}//endif
+			//check if user wants to add a new Series
+			if(!empty($this->request->data['in']['ser'])) {
+				//user added a new series
+				$addId=$this->Title->Series->checkAdd($this->request->data['in']['ser']);
+				if($addId)$this->request->data['Title']['series_id']=$addId;
+			}//endif
+			//check if user wants to add a new shelf
+			if(!empty($this->request->data['in']['shl'])) {
+				//user added a new shelf
+				$addId=$this->Title->Shelf->checkAdd($this->request->data['in']['shl']);
+				if($addId)$this->request->data['Title']['shelf_id']=$addId;
 			}//endif
 //debug($this->request->data);exit;
 			if ($this->Title->save($this->request->data)) {
@@ -153,6 +172,24 @@ class TitlesController extends AppController {
 				//user added a new category
 				$addId=$this->Title->Category->checkAdd($this->request->data['in']['cat']);
 				if($addId)$this->request->data['Title']['category_id']=$addId;
+			}//endif
+			//check if user wants to add a new binding
+			if(!empty($this->request->data['in']['bind'])) {
+				//user added a new binding
+				$addId=$this->Title->Binding->checkAdd($this->request->data['in']['bind']);
+				if($addId)$this->request->data['Title']['binding_id']=$addId;
+			}//endif
+			//check if user wants to add a new Series
+			if(!empty($this->request->data['in']['ser'])) {
+				//user added a new series
+				$addId=$this->Title->Series->checkAdd($this->request->data['in']['ser']);
+				if($addId)$this->request->data['Title']['series_id']=$addId;
+			}//endif
+			//check if user wants to add a new shelf
+			if(!empty($this->request->data['in']['shl'])) {
+				//user added a new shelf
+				$addId=$this->Title->Shelf->checkAdd($this->request->data['in']['shl']);
+				if($addId)$this->request->data['Title']['shelf_id']=$addId;
 			}//endif
 //debug($this->request->data);exit;
 			if ($this->Title->save($this->request->data)) {
