@@ -27,10 +27,22 @@
 		echo $this->Form->input('own');
 		echo $this->Form->input('read');
 		echo $this->Form->input('want');
-		echo $this->Form->input('rating');
 		echo $this->Form->input('form.referer',array('type'=>'hidden'));
+		echo $this->Form->input('rating',array('id'=>'rating','type'=>'hidden'));
+		//show rating stars
+		echo 'Rating:<table style="width:300px;"><tr>';
+		for ($i=0; $i<5; $i++) echo '<td><div class="tdBox">'.$this->Html->image('offstar.png',
+			array('class'=>'L1','url'=>"javascript:rating(".($i+1).")",'style'=>'position:relative;')).$this->Html->image('onstar.png',
+			array('class'=>'L1','url'=>"javascript:rating(".($i+1).")",'id'=>'on',
+			'style'=>'display:none;')).'</div></td>';
+		echo '</tr></table>';
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit'));?>
 </div>
 <?php echo $this->element('menu');?>
+<?php echo $this->Html->script(array('jquery-1.6.4.min','ratingstars.js'));?>
+<style type='text/css'>
+.tdBox { position:relative; padding:0;}
+.L1 { position:absolute; top:0px; left:0px; z-index:1; }
+</style>

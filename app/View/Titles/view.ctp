@@ -56,6 +56,29 @@
 			<?php echo h($title['Title']['isbn']); ?>
 			&nbsp;
 		</dd>
+		<dt><?php echo __('Own'); ?></dt>
+		<dd>
+			<?php echo ($title['Title']['own'] ? 'Y' : 'N'); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Read'); ?></dt>
+		<dd>
+			<?php echo ($title['Title']['read'] ? 'Y' : 'N'); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Want'); ?></dt>
+		<dd>
+			<?php echo ($title['Title']['want'] ? 'Y' : 'N'); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Rating'); ?></dt>
+		<dd>
+			<?php 
+				if(is_null($title['Title']['rating'])) echo'(not rated)';
+				else for($i=1; $i<=5; $i++) echo $this->Html->image(($title['Title']['rating']>=$i) ? 'onstar.png' : 'offstar.png',array('width'=>22)); 
+			?>
+			&nbsp;
+		</dd>
 		<dt><?php echo __('Created'); ?></dt>
 		<dd>
 			<?php echo h($title['Title']['created']); ?>

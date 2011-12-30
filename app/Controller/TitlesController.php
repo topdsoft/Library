@@ -16,7 +16,8 @@ class TitlesController extends AppController {
 	public function index() {
 //debug($this->Auth->user());exit();
 		$this->Title->recursive = 0;
-		$this->paginate=array('order'=>array('Title.author'=>'asc','Title.name'=>'asc'),'limit'=>$this->Auth->user('titleLimit'),'maxLimit'=>10000);
+		$fields=array('Title.id','Title.author','Title.name','Title.rating','Series.id','Series.name','Shelf.id','Shelf.name');
+		$this->paginate=array('fields'=>$fields,'order'=>array('Title.author'=>'asc','Title.name'=>'asc'),'limit'=>$this->Auth->user('titleLimit'),'maxLimit'=>10000);
 		$this->set('titles', $this->paginate());
 	}
 
