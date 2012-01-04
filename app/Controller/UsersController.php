@@ -59,14 +59,17 @@ class UsersController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
+		if(!$id) $id=$this->Auth->user('id');
 		$this->User->id = $id;
 		if (!$this->User->exists()) {
 			throw new NotFoundException(__('Invalid user'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->User->save($this->request->data)) {
+				$this->Auth->logout();
+				$this->Auth->login();
 				$this->Session->setFlash(__('The user has been saved'));
-				$this->redirect(array('action' => 'index'));
+				$this->redirect(array('controller'=>'titles','action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
 			}

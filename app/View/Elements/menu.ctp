@@ -25,7 +25,7 @@ function menu($obj,$controller,$contLabel,$items) {
 			menu($this,'publishers','Publishers',array(array('label'=>'List Publishers','action'=>'index'),array('label'=>'New Publisher','action'=>'add')));
 			menu($this,'shelves','Shelves',array(array('label'=>'List Shelves','action'=>'index'),array('label'=>'New Shelf','action'=>'add')));
 			menu($this,'tags','Tags',array(array('label'=>'List Tags','action'=>'index'),array('label'=>'New Tag','action'=>'add')));
-			menu($this,'users','User Setup',array(array('label'=>'Download','action'=>'download')));
+			menu($this,'users','User Setup',array(array('label'=>'Download','action'=>'download'),array('label'=>'Options','action'=>'edit')));
 		?>
 	</ul>
 </div>
