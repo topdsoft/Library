@@ -15,9 +15,32 @@ class TitlesController extends AppController {
  */
 	public function index() {
 //debug($this->Auth->user());exit();
+		$include=null;
+		if (isset($this->params['data']['dosearch'])) {
+			//search
+			$params=array();
+			if(!empty($this->params['data']['searchtitle'])) {
+				//searching title
+				$params[]=array('Title.name LIKE'=>'%'.$this->params['data']['searchtitle'].'%');
+			}//endif
+			if(!empty($this->params['data']['searchauthor'])) {
+				//searching author
+				$params[]=array('Title.author LIKE'=>'%'.$this->params['data']['searchauthor'].'%');
+			}//endif
+			$results=$this->Title->find('all',array('recursive'=>0,'fields'=>'Title.id','conditions'=>$params));
+			$include=array();
+			foreach($results as $result) $include[]=$result['Title']['id'];
+			//save data for form to use
+			$this->set('searchtitle',$this->params['data']['searchtitle']);
+			$this->set('searchauthor',$this->params['data']['searchauthor']);
+			$this->set('results',count($include));
+//debug($include);debug($results);exit;
+		}//endif
 		$this->Title->recursive = 0;
 		$fields=array('Title.id','Title.author','Title.name','Title.rating','Series.id','Series.name','Shelf.id','Shelf.name');
-		$this->paginate=array('fields'=>$fields,'order'=>array('Title.author'=>'asc','Title.name'=>'asc'),'limit'=>$this->Auth->user('titleLimit'),'maxLimit'=>10000);
+		$order=array('Title.author'=>'asc','Title.name'=>'asc');
+		if($include)$this->paginate=array('fields'=>$fields,'order'=>$order,'limit'=>$this->Auth->user('titleLimit'),'maxLimit'=>10000,'conditions'=>array('Title.id'=>$include));
+		else $this->paginate=array('fields'=>$fields,'order'=>$order,'limit'=>$this->Auth->user('titleLimit'),'maxLimit'=>10000);
 		$this->set('titles', $this->paginate());
 	}
 

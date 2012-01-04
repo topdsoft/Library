@@ -1,5 +1,10 @@
 <div class="titles index">
+<?php echo $this->Form->create('Title');?>
 	<h2><?php echo __('Titles');?></h2>
+	<input type="search" placeholder="Search titles..." results="10" name="searchtitle" value="<?php if(isset($searchtitle)) echo $searchtitle;?>"/>
+	<input type="search" placeholder="Search authors..." results="10" name="searchauthor" value="<?php if(isset($searchauthor)) echo $searchauthor;?>"/>
+	<input type="submit" name="dosearch" value="Search"/>
+	<?php if(isset($results)) echo "Found $results matches for your search. ".$this->Html->link(__('Clear Search Results',true), array('action'=>'index'));?>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>

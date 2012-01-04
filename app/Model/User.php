@@ -64,4 +64,42 @@ class User extends AppModel {
 			),
 		),
 	);
+	function createCSV() {
+		/** create SCV file from user data
+		$uname is the username used for databse name and directory
+		**/
+		$titles=ClassRegistry::init('Title')->find('all');
+//debug($titles);exit;
+		//parse results into arrays more formatted to csv
+		$final=array();
+		$final[]=array('Title','Author','Added','Year','ISBN','Own','Read','Want','Rating','Publisher','Category','Binding','Series','Shelf','Tags','Notes');
+		foreach($titles as $title) {
+			//loop for all titles
+			$tags='';
+			foreach($title['Tag'] as $tag) $tags.='['.$tag['name'].']';
+			//condesne
+			$final[]=array(
+				$title['Title']['name'],
+				$title['Title']['author'],
+				$title['Title']['created'],
+				$title['Title']['year'],
+				$title['Title']['isbn'],
+				$title['Title']['own'],
+				$title['Title']['read'],
+				$title['Title']['want'],
+				$title['Title']['rating'],
+				$title['Publisher']['name'],
+				$title['Category']['name'],
+				$title['Binding']['name'],
+				$title['Series']['name'],
+				$title['Shelf']['name'],
+				$tags,
+				$title['Title']['notes']
+			);
+		}//endforeach
+		$fp= fopen('files/library.csv','w');
+		foreach($final as $line) fputcsv($fp,$line);
+		fclose($fp);
+	}
+
 }

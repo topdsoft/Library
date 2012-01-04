@@ -110,4 +110,9 @@ class UsersController extends AppController {
 	public function logout() {
 		$this->redirect($this->Auth->logout());
 	}
+
+	function download() {
+		//create-update CSV
+		$this->User->createCSV();
+	}//end function download
 }
