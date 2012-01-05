@@ -122,7 +122,8 @@ class UsersController extends AppController {
 	public function update() {
 		//do a git-pull
 		$output=shell_exec('git pull');
-debug($output);exit;
+		$this->set('output',$output);
+//debug($output);exit;
 	}
 	
 }
