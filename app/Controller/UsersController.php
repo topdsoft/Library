@@ -114,8 +114,15 @@ class UsersController extends AppController {
 		$this->redirect($this->Auth->logout());
 	}
 
-	function download() {
+	public function download() {
 		//create-update CSV
 		$this->User->createCSV();
 	}//end function download
+	
+	public function update() {
+		//do a git-pull
+		$output=shell_exec('git pull');
+debug($output);exit;
+	}
+	
 }
