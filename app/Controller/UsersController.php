@@ -65,9 +65,13 @@ class UsersController extends AppController {
 			throw new NotFoundException(__('Invalid user'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
+			unset($this->request->data['User']['password']);
 			if ($this->User->save($this->request->data)) {
-				$this->Auth->logout();
-				$this->Auth->login();
+				$this->Session->write('Auth.User.titleLimit',$this->request->data['User']['titleLimit']);
+				$this->Session->write('Auth.User.email',$this->request->data['User']['email']);
+//debug($this->Session->read('Auth'));exit;
+//				$this->Auth->logout();
+//				$this->Auth->login();
 				$this->Session->setFlash(__('The user has been saved'));
 				$this->redirect(array('controller'=>'titles','action' => 'index'));
 			} else {
